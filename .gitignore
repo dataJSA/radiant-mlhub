@@ -6,6 +6,15 @@ __pycache__/
 # C extensions
 *.so
 
+# files 
+*.tif
+*.csv
+*.log
+*.pdf
+
+# VSCode
+.vscode
+
 # Distribution / packaging
 .Python
 build/
