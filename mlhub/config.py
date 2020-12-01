@@ -1,8 +1,8 @@
 import sys
 import pathlib
 import logging
-
 import mlhub
+
 
 PACKAGE_ROOT = pathlib.Path(mlhub.__file__).resolve().parent
 LOG_FILE = pathlib.Path().cwd() / 'MLHUB.log'
@@ -19,6 +19,6 @@ def get_console_handler():
 
 
 def get_file_handler():
-    file_handler = logging.FileHandler(filename=config.LOG_FILE, mode='a')
+    file_handler = logging.FileHandler(filename=LOG_FILE, mode='a')
     file_handler.setFormatter(FORMATTER)
     return file_handler
