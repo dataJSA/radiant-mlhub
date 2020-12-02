@@ -97,14 +97,14 @@ def test_get_items_source_assets():
 
 
 @pytest.mark.skip(reason="This test is not implemented yet")
-def test_get_item_source_and_label_assets():
+def test_get_item_all_assets():
     """[summary]
     """
     pass
 
 
 @pytest.mark.skip(reason="This test is not implemented yet")
-def test_get_items_source_and_label_assets():
+def test_get_items_all_assets():
     """[summary]
     """
     pass

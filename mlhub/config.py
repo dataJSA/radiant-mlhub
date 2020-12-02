@@ -3,7 +3,6 @@ import pathlib
 import logging
 import mlhub
 
-
 PACKAGE_ROOT = pathlib.Path(mlhub.__file__).resolve().parent
 LOG_FILE = pathlib.Path().cwd() / 'MLHUB.log'
 
