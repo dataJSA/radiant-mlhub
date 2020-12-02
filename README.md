@@ -9,9 +9,8 @@
 <p align="center"> The mlhub package aims at providing a toolbox for interracting with the Radiant MLhub API and accessing the Earth Observations training datasets hosted on the Radiant MLHub platform.
 </p>
 
-## Table Of Contents
+## Table Of Contents <!-- omit in toc -->
 
-- [Table Of Contents](#table-of-contents)
 - [Radiant MLHub](#radiant-mlhub)
   - [Radiant MLHub API](#radiant-mlhub-api)
     - [Spatio-Temporal Asset Catalog](#spatio-temporal-asset-catalog)
