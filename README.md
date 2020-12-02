@@ -28,13 +28,15 @@
 - [Acknowledgements](#acknowledgements)
 
 ## Radiant MLHub 
-The Radiant MLHub is an open library for geospatial training data to advance machine learning applications on Earth Observations.
-The training datasets include **pairs of imagery and labels** for different types of ML problems including **image classification**, **object detection**, and **semantic segmentation**. 
+
+The Radiant MLHub is an open library for geospatial training data to advance machine learning applications on Earth Observations. The training datasets include **pairs of imagery and labels** for different types of ML problems including **image classification**, **object detection**, and **semantic segmentation**. 
 
 ### Radiant MLHub API
+
 The Radiant MLHub API gives access to the different datasets. You can access the full API documentation at [docs.mlhub.earth](docs.mlhub.earth) and check the [Radiant MLHub site](https://mlhub.earth). 
 
 #### Spatio-Temporal Asset Catalog 
+
 Datasets are stored as collections on Radiant MLHub catalog an each item in their collections is explained in json format compliant with [STAC](https://stacspec.org/) [label extension](https://github.com/radiantearth/stac-spec/tree/master/extensions/label) definition.
 
 - **A collection** represents the top-most data level i.e. that data comes from the same source for the same geography and might include different years or sub-geographies. Additional fields to enable description of things like the spatial and temporal extent of the data, the license, keywords, providers, etc.
