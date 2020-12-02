@@ -43,11 +43,16 @@ Datasets are stored as collections on Radiant MLHub catalog an each item in thei
 
 - **An item** represents an atomic collection of inseparable data and metadata (**assets**). A STAC Item is a GeoJSON feature and can be easily read by any modern GIS or geospatial library. The STAC Item JSON specification includes additional fields for:
 
-    - the time the **asset** represents
-    - thumbnail for quick browsing
-    - **asset** links, links to the described data
-    - relationship links, allowing users to traverse other related STAC Items.
+    - **properties** property containing metadata (date of revisit)
+    - **assets** property providing links to the described data
+    - **links** property allowing users to traverse other related STAC Items.
 
+- **An asset** is an object that that can be downloaded or streamed. The links to the assets associated with an Item are contained in the *assets* property of an item. Depending on the dataset asset can be:
+  
+  - One or several **GeoTIFF files** (representing the spectral bands)
+  - GeoJSON files 
+  - Documentation PDF files 
+  
 #### Radiant MLHub Datasets
 
 ![](https://miro.medium.com/max/1260/1*Ei8QLbju7wfssi7w7NBOUA.png)
@@ -59,6 +64,7 @@ Radiant MLHub datasets are split into two STAC collections: One contains STAC it
 - **Source imagery items** contain all information required to determine the location and time that the imagery was taken, as well as links to download either individual bands of the imagery or the multi-band files.
  
 For more details see Kevin Booth article [Accessing and Downloading Training Data on the Radiant MLHub API ](https://medium.com/radiant-earth-insights/accessing-and-downloading-training-data-on-the-radiant-mlhub-api-f04dc635592f)
+
 
 ## Getting Started
 
