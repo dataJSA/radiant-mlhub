@@ -220,7 +220,7 @@ Description of the MLHubClient object collection: \n \n\
             'stac_extensions', 'type').
         """
         collection_id = self.collection_id if collection_id is None else collection_id
-        items_ids = [self.feature_id] if item_id is None else items_id
+        items_ids = [self.feature_id] if items_ids is None else items_ids
         return self._multiprocess(lambda item: self.get_item(collection_id=collection_id, item_id=item), items_ids)
 
     def get_item_assets(self, item, assets_keys):
