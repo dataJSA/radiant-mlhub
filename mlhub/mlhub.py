@@ -262,7 +262,7 @@ Description of the MLHubClient object collection: \n \n\
 
 
         Args:
-            asset_ref (str): asset reference link.
+            asset_ref (tuple): asset reference link tuple (path, href).
             root (str): root directory.
         """
 
@@ -294,7 +294,7 @@ is returned as {type(download_uri)}")
         The `downloads` function download multiple assets given their reference links.
 
         Args:
-            assets_ref (str): assets reference links.
+            assets_ref (list[tuples]): assets reference links list of tuples.
             root (str): root directory.
         """
         return self._multiprocess(lambda asset_ref: self.download(asset_ref=asset_ref), assets_ref, leave=leave)
