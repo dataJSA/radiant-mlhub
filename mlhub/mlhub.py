@@ -50,7 +50,7 @@ class Client(object):
         self.threads = threads
         self.collection_id = collection_id
         self.feature_id = feature_id
-        self.base_url = 'http://api.radiant.earth/mlhub/v1'
+        self.base_url = 'https://api.radiant.earth/mlhub/v1'
         self.headers = {
             'Accept': 'application/json',
             'Authorization': f'Bearer {api_token}'
@@ -426,7 +426,7 @@ is returned as {type(download_uri)}")
             collection = response.json()
             for item in collection.get('features', []):
                 logger.info(f"Getting label and source imagery for the item: {item.get('id', 'missing_id')}")
-                assets_ref = self.get_item_source_and_label_assets(item)
+                assets_ref = self.get_item_all_assets(item)
                 assets_ref_flat = list(chain(*assets_ref))
                 collection_assets_ref.extend(assets_ref_flat)
                 self.assets_fetched.extend(assets_ref_flat)
@@ -440,11 +440,12 @@ is returned as {type(download_uri)}")
             #Get the next page results, if available
             for link in collection.get('links', []):
                 if link['rel'] == 'next' and link['href'] is not None:
-                    self.get_items_source_and_label_assets(uri=link['href'], classes=classes,
-                                                           max_items=max_items,
-                                                           last_page=20, limits=limits,
-                                                           items_downloaded=items_downloaded,
-                                                           collection_assets_ref=collection_assets_ref)
+                    self.get_items_all_assets(uri=link['href'], 
+                                              classes=classes,
+                                              max_items=max_items,
+                                              last_page=20, limits=limits,
+                                              items_downloaded=items_downloaded,
+                                              collection_assets_ref=collection_assets_ref)
 
         else:
             logger.info(f"No label or source imagery retrieved from url:\n{uri}")
@@ -454,9 +455,12 @@ is returned as {type(download_uri)}")
             next_uri = self.collection_items_uri + f"?&page={next_page}&limit={limits}"
             if next_page <= last_page:
                 logger.info(f"Retrieving next page {next_page}:\n{next_uri}")
-                self.get_items_source_and_label_assets(uri=next_uri, classes=classes, max_items=max_items,
-                                                       last_page=20, limits=limits,
-                                                       items_downloaded=items_downloaded,
-                                                       collection_assets_ref=collection_assets_ref)
+                self.get_items_all_assets(uri=next_uri, 
+                                          classes=classes,
+                                          max_items=max_items,
+                                          last_page=20,
+                                          limits=limits,
+                                          items_downloaded=items_downloaded,
+                                          collection_assets_ref=collection_assets_ref)
 
         return collection_assets_ref
