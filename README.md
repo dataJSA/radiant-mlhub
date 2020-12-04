@@ -1,5 +1,7 @@
 <h1 align="center"> Radiant MLHub Client</h1>
 <p align="center">
+    <a href="https://colab.research.google.com/github/dataJSA/radiant-mlhub/blob/master/examples/mlhub_client.ipynb">
+  <img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
     <a href="">
         <img alt="Lifecycle: experimental" src="https://img.shields.io/badge/lifecycle-experimental-orange.svg"></a>
     <a href="LICENSE" alt="License">
