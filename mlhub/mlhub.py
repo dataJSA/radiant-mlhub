@@ -440,7 +440,7 @@ is returned as {type(download_uri)}")
             #Get the next page results, if available
             for link in collection.get('links', []):
                 if link['rel'] == 'next' and link['href'] is not None:
-                    self.get_items_all_assets(uri=link['href'], 
+                    self.get_items_all_assets(uri=link['href'],
                                               classes=classes,
                                               max_items=max_items,
                                               last_page=20, limits=limits,
@@ -455,7 +455,7 @@ is returned as {type(download_uri)}")
             next_uri = self.collection_items_uri + f"?&page={next_page}&limit={limits}"
             if next_page <= last_page:
                 logger.info(f"Retrieving next page {next_page}:\n{next_uri}")
-                self.get_items_all_assets(uri=next_uri, 
+                self.get_items_all_assets(uri=next_uri,
                                           classes=classes,
                                           max_items=max_items,
                                           last_page=20,
