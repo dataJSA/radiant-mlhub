@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Want to suggest improvements? Let us know! 🚀
+about: Want to suggest a new features? Let us know! 🚀
 title: ''
 labels: ''
 assignees: ''
