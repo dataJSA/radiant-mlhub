@@ -350,11 +350,74 @@ is returned as {type(download_uri)}")
         """
         return self._multiprocess(lambda item: self.get_item_source_assets(source_item_ref=item), source_items_ref)
 
-    def get_item_label_assets():
-        pass
+    def get_item_label_assets(self, label_item):
+        label_list = self.get_item_assets(label_item, assets_keys=['labels'])  # OK
+        label_item_id, _, item_label_hyperlink = label_list[0]  # OK
+        item_path = f'landcovernet/{label_item_id}/'
+        assets_ref = [(item_path, item_label_hyperlink)]
+        return assets_ref
 
-    def get_items_label_assets():
-        pass
+    def get_items_label_assets(self,
+                               uri,
+                               classes=None,
+                               max_items=None,
+                               last_page=20,
+                               limits=100,
+                               items_downloaded=0,
+                               collection_assets_ref=None):
+
+        if collection_assets_ref is None:
+            collection_assets_ref = []
+
+        collection_params = {'limit': limits}
+
+        # - get_uri status to safely retrive response document
+        if 'limits' in uri:
+            response = self._get_uri(uri, headers=self.headers)
+        else:
+            response = self._get_uri(uri, headers=self.headers, params=collection_params)
+        # safely unpack json document
+        if response is not None:
+            collection = response.json()
+            for item in collection.get('features', []):
+                logger.info(f"Getting label imagery for the item: {item.get('id', 'missing_id')}")
+                assets_ref = self.get_item_label_assets(item)
+                collection_assets_ref.extend(assets_ref)
+                self.assets_fetched.extend(assets_ref)
+                items_downloaded += 1
+                #results = collection_assets_ref.copy()
+
+                #Stop retrieving items if max_items number is reach
+                if max_items is not None and items_downloaded >= max_items:
+                    return collection_assets_ref
+
+            #Get the next page results, if available
+            for link in collection.get('links', []):
+                if link['rel'] == 'next' and link['href'] is not None:
+                    self.get_items_label_assets(uri=link['href'],
+                                                classes=classes,
+                                                max_items=max_items,
+                                                last_page=20, limits=limits,
+                                                items_downloaded=items_downloaded,
+                                                collection_assets_ref=collection_assets_ref)
+
+        else:
+            logger.info(f"No label or source imagery retrieved from url:\n{uri}")
+
+            #Get the next page if results, if available
+            next_page = int(re.findall(r'page=(.+?)&', uri)[0]) + 1
+            next_uri = self.collection_items_uri + f"?&page={next_page}&limit={limits}"
+            if next_page <= last_page:
+                logger.info(f"Retrieving next page {next_page}:\n{next_uri}")
+                self.get_items_label_assets(uri=next_uri,
+                                            classes=classes,
+                                            max_items=max_items,
+                                            last_page=20,
+                                            limits=limits,
+                                            items_downloaded=items_downloaded,
+                                            collection_assets_ref=collection_assets_ref)
+
+        return collection_assets_ref
 
     def get_item_all_assets(self, label_item):
         """Get label-item assset and related source-items assets reference links from a label-item.
