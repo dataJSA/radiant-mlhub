@@ -350,6 +350,12 @@ is returned as {type(download_uri)}")
         """
         return self._multiprocess(lambda item: self.get_item_source_assets(source_item_ref=item), source_items_ref)
 
+    def get_item_label_assets():
+        pass
+
+    def get_items_label_assets():
+        pass
+
     def get_item_all_assets(self, label_item):
         """Get label-item assset and related source-items assets reference links from a label-item.
 
